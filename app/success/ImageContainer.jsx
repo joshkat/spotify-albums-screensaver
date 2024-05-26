@@ -8,7 +8,6 @@ export default function ImageContainer({ imageArray, length }) {
       const intervalId = setInterval(() => {
         try {
           let randomIndex = Math.floor(Math.random() * length);
-          console.log(randomIndex);
           let img = document.getElementById(`image-${randomIndex}`);
           if (img !== null) img.click();
         } catch (err) {
@@ -39,7 +38,8 @@ export default function ImageContainer({ imageArray, length }) {
           key={index}
           className="flex flex-col items-center"
           id={`image-${index}`}
-          onClick={() => {
+          onClick={(e) => {
+            // console.log(e);
             handleFlip(index);
           }}
         >
@@ -58,6 +58,36 @@ export default function ImageContainer({ imageArray, length }) {
           </div>
         </div>
       ))}
+
+      <div
+        className="flex flex-col items-center"
+        id={`image-100`}
+        onClick={(e) => {
+          console.log(e);
+          handleFlip(100);
+        }}
+      >
+        <div className="relative">
+          <div id={`front_100`} className="cardFront absolute">
+            <Image
+              src={imageArray[0 + 1]}
+              width={280}
+              height={280}
+              alt="image"
+              id="front-img-100"
+            />
+          </div>
+          <div id={`back_100`} className="cardBack">
+            <Image
+              src={imageArray[3]}
+              width={280}
+              height={280}
+              alt="image"
+              id="back-img-100"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   ) : (
     "array empty"

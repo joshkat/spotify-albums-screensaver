@@ -22,7 +22,6 @@
 .cardBack,
 .cardFront {
   transition: transform 0.5s ease;
-  /* position: absolute; */
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
