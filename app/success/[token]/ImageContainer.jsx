@@ -1,95 +1,86 @@
 "use client";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export default function ImageContainer({ imageArray, length }) {
+export default function ImageContainer({ imageArray }) {
+  //split array into front and back
+  const [frontSides, setFrontSides] = useState(imageArray.slice(0, 40));
+  const [backSides, setBackSides] = useState(imageArray.slice(40, 80));
+
   useEffect(() => {
-    if (length > 0) {
-      const intervalId = setInterval(() => {
-        try {
-          let randomIndex = Math.floor(Math.random() * length);
-          let img = document.getElementById(`image-${randomIndex}`);
-          if (img !== null) img.click();
-        } catch (err) {
-          console.log("no");
-        }
-      }, 1000); // Click every second (1000 milliseconds)
+    const intervalId = setInterval(() => {
+      try {
+        let randomIndex = Math.floor(Math.random() * 40);
+        let img = document.getElementById(`image-${randomIndex}`);
+        if (img !== null) img.click();
+      } catch (err) {
+        console.log("Error flipping cards");
+      }
+    }, 2000); // Flips every 2 second(s) (2000 milliseconds)
 
-      return () => clearInterval(intervalId);
-    }
-  }, [length]);
+    return () => clearInterval(intervalId);
+  }, []);
 
   function handleFlip(index) {
     const front = document.getElementById(`front_${index}`);
     const back = document.getElementById(`back_${index}`);
 
-    front.classList.toggle("flipped");
-    back.classList.toggle("flipped");
+    const frontTrue = front.classList.toggle("flipped");
+    const backTrue = back.classList.toggle("flipped");
+    console.log(frontTrue, backTrue);
+    // when theyre false update front
+    if (!frontTrue && !backTrue) {
+      front.children[0].src = JSON.parse(
+        frontSides[Math.floor(Math.random() * 40)]
+      ).songCover;
+      front.children[0].srcset = JSON.parse(
+        frontSides[Math.floor(Math.random() * 40)]
+      ).songCover;
+    } else {
+      // when theyre true update back
+      back.children[0].src = JSON.parse(
+        backSides[Math.floor(Math.random() * 40)]
+      ).songCover;
+      back.children[0].srcset = JSON.parse(
+        backSides[Math.floor(Math.random() * 40)]
+      ).songCover;
+    }
   }
 
-  if (imageArray[0] === -1) {
-    return <span className="loading loading-spinner w-32"></span>;
-  }
-
-  return imageArray.length > 0 ? (
-    <div className="grid grid-cols-6 grid-rows-4">
-      {imageArray.map((url, index) => (
+  return (
+    <div className="grid grid-cols-8 grid-rows-5">
+      {imageArray.slice(0, 40).map((imgObj, index) => (
         <div
           key={index}
           className="flex flex-col items-center"
           id={`image-${index}`}
           onClick={(e) => {
-            // console.log(e);
             handleFlip(index);
           }}
         >
           <div className="relative">
             <div id={`front_${index}`} className="cardFront absolute">
-              <Image src={url} width={280} height={280} alt="image" />
+              <Image
+                src={JSON.parse(imgObj).songCover}
+                width={128}
+                height={128}
+                alt="image"
+              />
             </div>
             <div id={`back_${index}`} className="cardBack">
               <Image
-                src={imageArray[index + 1] || imageArray[index - 3]}
-                width={280}
-                height={280}
+                src={
+                  JSON.parse(backSides[Math.floor(Math.random() * 40)])
+                    .songCover
+                }
+                width={128}
+                height={128}
                 alt="image"
               />
             </div>
           </div>
         </div>
       ))}
-
-      <div
-        className="flex flex-col items-center"
-        id={`image-100`}
-        onClick={(e) => {
-          console.log(e);
-          handleFlip(200);
-        }}
-      >
-        <div className="relative">
-          <div id={`front_100`} className="cardFront absolute">
-            <Image
-              src={imageArray[0 + 1]}
-              width={280}
-              height={280}
-              alt="image"
-              id="front-img-100"
-            />
-          </div>
-          <div id={`back_100`} className="cardBack">
-            <Image
-              src={imageArray[3]}
-              width={280}
-              height={280}
-              alt="image"
-              id="back-img-100"
-            />
-          </div>
-        </div>
-      </div>
     </div>
-  ) : (
-    "array empty"
   );
 }

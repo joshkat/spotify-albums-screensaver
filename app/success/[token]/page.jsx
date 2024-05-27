@@ -8,6 +8,7 @@ async function getImageURLs(albumSet, url, token) {
   }
 
   const req = fetch(url, {
+    cache: "force-cache",
     method: "GET",
     headers: {
       "content-type": "application/x-www-form-urlencoded",
@@ -19,7 +20,7 @@ async function getImageURLs(albumSet, url, token) {
   if (res.status != 200) {
     // something went down get out of here
     console.log(await res.text(), res.status);
-    return;
+    return [];
   }
 
   const json = await res.json();
@@ -42,15 +43,16 @@ export default async function Success({ params }) {
     "https://api.spotify.com/v1/me/tracks?limit=50",
     params.token
   );
-  console.log(albumImageURLs);
   return (
-    <main className="flex flex-col items-center min-h-screen p-16 gap-12">
-      <div>{params.token}</div>
-      <div>{albumImageURLs[0]}</div>
-      {/* <ImageContainer
-        imageArray={albumImageURLs}
-        length={albumImageURLs.length}
-      /> */}
+    <main className="flex flex-col items-center min-h-screen p-16">
+      <p className="text-center">
+        Here&rsquo;s the grid, taken straight from your liked songs!
+        <br />
+        Keep in mind if you didn&rsquo;t have 80 songs from unique albums saved
+        there will be repeats :)
+      </p>
+
+      <ImageContainer imageArray={albumImageURLs} />
     </main>
   );
 }
