@@ -64,7 +64,7 @@ export default function ImageContainer({ imageArray, length }) {
         id={`image-100`}
         onClick={(e) => {
           console.log(e);
-          handleFlip(100);
+          handleFlip(200);
         }}
       >
         <div className="relative">

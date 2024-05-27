@@ -12,8 +12,11 @@ export async function GET(request) {
   }
 
   const spotifyJSON = await requestAccessToken(code);
+  if (Object.keys(spotifyJSON).includes("error")) {
+    return NextResponse.redirect(new URL("/error", request.url));
+  }
   return NextResponse.redirect(
-    new URL(`/success?user_token=${spotifyJSON.access_token}`, request.url)
+    new URL(`/success/${spotifyJSON.access_token}`, request.url)
   );
 }
 
