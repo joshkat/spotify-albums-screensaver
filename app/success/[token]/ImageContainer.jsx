@@ -6,6 +6,7 @@ export default function ImageContainer({ imageArray }) {
   //split array into front and back
   const [frontSides, setFrontSides] = useState(imageArray.slice(0, 40));
   const [backSides, setBackSides] = useState(imageArray.slice(40, 80));
+  const imgSide = 640;
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -27,7 +28,7 @@ export default function ImageContainer({ imageArray }) {
 
     const frontTrue = front.classList.toggle("flipped");
     const backTrue = back.classList.toggle("flipped");
-    console.log(frontTrue, backTrue);
+
     // when theyre false update front
     if (!frontTrue && !backTrue) {
       front.children[0].src = JSON.parse(
@@ -48,7 +49,7 @@ export default function ImageContainer({ imageArray }) {
   }
 
   return (
-    <div className="grid grid-cols-8 grid-rows-5">
+    <div className="grid grid-cols-8 grid-rows-5" id="image-container">
       {imageArray.slice(0, 40).map((imgObj, index) => (
         <div
           key={index}
@@ -62,8 +63,8 @@ export default function ImageContainer({ imageArray }) {
             <div id={`front_${index}`} className="cardFront absolute">
               <Image
                 src={JSON.parse(imgObj).songCover}
-                width={128}
-                height={128}
+                width={imgSide}
+                height={imgSide}
                 alt="image"
               />
             </div>
@@ -73,8 +74,8 @@ export default function ImageContainer({ imageArray }) {
                   JSON.parse(backSides[Math.floor(Math.random() * 40)])
                     .songCover
                 }
-                width={128}
-                height={128}
+                width={imgSide}
+                height={imgSide}
                 alt="image"
               />
             </div>

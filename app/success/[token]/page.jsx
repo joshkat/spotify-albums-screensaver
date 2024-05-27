@@ -1,14 +1,14 @@
+import FullscreenButton from "./FullscreenButton";
 import ImageContainer from "./ImageContainer";
 
 async function getImageURLs(albumSet, url, token) {
   if (albumSet.size >= 80 || url === null) {
     // base case when we hit desired num of URLs or when URL is ""
-    // console.log([...albumSet], albumSet.size);
     return [...albumSet];
   }
 
   const req = fetch(url, {
-    cache: "force-cache",
+    cache: "no-cache",
     method: "GET",
     headers: {
       "content-type": "application/x-www-form-urlencoded",
@@ -52,6 +52,7 @@ export default async function Success({ params }) {
         there will be repeats :)
       </p>
 
+      <FullscreenButton />
       <ImageContainer imageArray={albumImageURLs} />
     </main>
   );
