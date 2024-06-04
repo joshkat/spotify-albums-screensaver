@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import FullscreenButton from "./FullscreenButton";
 import ImageContainer from "./ImageContainer";
 
@@ -18,9 +19,9 @@ async function getImageURLs(albumSet, url, token) {
 
   let res = await req;
   if (res.status != 200) {
-    // something went down get out of here
-    console.log(await res.text(), res.status);
-    return [];
+    // something went down, redirect out of here
+    console.log(await res.text(), res.status, token);
+    redirect("/403");
   }
 
   const json = await res.json();
