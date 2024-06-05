@@ -11,7 +11,7 @@ export default function PlaylistButtons({ initalPlaylists, token }) {
 
   return (
     <>
-      <div className="w-full p-10 flex flex-wrap items-center justify-center gap-10">
+      <div className="w-full flex flex-wrap items-center justify-center gap-10">
         <div
           className="flex h-40 w-[450px] space-x-4 p-4 border rounded-md shadow-md playlist-button"
           onClick={() => {

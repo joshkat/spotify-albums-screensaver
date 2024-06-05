@@ -5,7 +5,7 @@ import { getPlaylists } from "@/app/lib/getPlaylists";
 export default async function SelectionScreen({ params }) {
   const playlists = (await getPlaylists(params.token, 0))[[0]];
   return (
-    <main className="flex flex-col items-center min-h-screen p-16">
+    <main className="flex flex-col items-center min-h-screen p-10">
       <p className="text-center">
         Select the playlist, keep in mind depending on playlist size the grid
         will be resize accordingly.
