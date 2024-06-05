@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
 
 export async function getPlaylists(token, offset) {
   const req = fetch(
@@ -21,14 +22,5 @@ export async function getPlaylists(token, offset) {
   }
 
   const json = await res.json();
-  return json;
-  // let newSet = new Set(albumSet);
-
-  // json.items.map((itemsObj) => {
-  //   const setObj = {
-  //     albumURL: itemsObj?.track?.album?.external_urls?.spotify,
-  //     songCover: itemsObj?.track?.album?.images[0]?.url,
-  //   };
-  //   newSet.add(JSON.stringify(setObj));
-  // });
+  return [json.items, { next: json.next }];
 }
