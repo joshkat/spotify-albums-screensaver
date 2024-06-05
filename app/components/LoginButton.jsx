@@ -8,7 +8,7 @@ export default function LoginButton() {
       className="btn"
       onClick={() => {
         const state = "asdf1234";
-        const scope = "user-library-read";
+        const scope = "user-library-read playlist-read-private";
         const redirect_uri = process.env.NEXT_PUBLIC_REDIRECT_URI;
         const client_id = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
         router.push(
