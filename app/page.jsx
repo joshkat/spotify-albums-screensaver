@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function Home() {
   const scope = "user-library-read playlist-read-private";
-  const redirect_uri = process.env.REDIRECT_URI;
-  const client_id = process.env.SPOTIFY_CLIENT_ID;
+  const redirect_uri = process.env.NEXT_PUBLIC_REDIRECT_URI;
+  const client_id = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
   const redirect_link = `https://accounts.spotify.com/authorize?response_type=code&client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&show_dialog=true`;
   return (
     <main
