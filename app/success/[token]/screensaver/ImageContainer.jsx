@@ -1,17 +1,17 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function ImageContainer({ imageArray }) {
   //split array into front and back
-  const [frontSides, setFrontSides] = useState(imageArray.slice(0, 40));
-  const [backSides, setBackSides] = useState(imageArray.slice(40, 80));
+  const frontSides = imageArray.slice(0, 40);
+  const backSides = shuffle(imageArray.slice(40, 80));
   const imgSide = 640;
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       try {
-        let randomIndex = Math.floor(Math.random() * 40);
+        let randomIndex = Math.floor(Math.random() * imageArray.length);
         let img = document.getElementById(`image-${randomIndex}`);
         if (img !== null) img.click();
       } catch (err) {
@@ -29,22 +29,18 @@ export default function ImageContainer({ imageArray }) {
     const frontTrue = front.classList.toggle("flipped");
     const backTrue = back.classList.toggle("flipped");
 
+    let selectedURL = JSON.parse(
+      imageArray[Math.floor(Math.random() * imageArray.length)]
+    ).songCover; // pick a random URL
+
     // when theyre false update front
     if (!frontTrue && !backTrue) {
-      front.children[0].src = JSON.parse(
-        frontSides[Math.floor(Math.random() * 40)]
-      ).songCover;
-      front.children[0].srcset = JSON.parse(
-        frontSides[Math.floor(Math.random() * 40)]
-      ).songCover;
+      front.children[0].src = selectedURL;
+      front.children[0].srcset = selectedURL;
     } else {
       // when theyre true update back
-      back.children[0].src = JSON.parse(
-        backSides[Math.floor(Math.random() * 40)]
-      ).songCover;
-      back.children[0].srcset = JSON.parse(
-        backSides[Math.floor(Math.random() * 40)]
-      ).songCover;
+      back.children[0].src = selectedURL;
+      back.children[0].srcset = selectedURL;
     }
   }
 
@@ -84,4 +80,17 @@ export default function ImageContainer({ imageArray }) {
       ))}
     </div>
   );
+}
+
+function shuffle(arr) {
+  let i = arr.length,
+    j,
+    temp;
+  while (--i > 0) {
+    j = Math.floor(Math.random() * (i + 1));
+    temp = arr[j];
+    arr[j] = arr[i];
+    arr[i] = temp;
+  }
+  return arr;
 }

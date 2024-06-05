@@ -25,3 +25,12 @@
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
+
+.playlist-button {
+  transition: all 0.2s ease;
+}
+
+.playlist-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px white;
+}
