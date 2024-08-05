@@ -2,12 +2,14 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { getPlaylists } from "@/app/lib/getPlaylists";
 
 export default function PlaylistButtons({ initalPlaylists, token }) {
   const [playlists, setPlaylists] = useState(initalPlaylists);
   const [offset, setOffset] = useState(20);
   const [isNextNull, setIsNextNull] = useState(false);
+  const router = useRouter();
 
   return (
     <>
@@ -15,7 +17,7 @@ export default function PlaylistButtons({ initalPlaylists, token }) {
         <div
           className="flex h-40 w-[450px] space-x-4 p-4 border rounded-md shadow-md playlist-button"
           onClick={() => {
-            console.log("https://api.spotify.com/v1/me/tracks?limit=50");
+            router.push(`/success/screensaver?id=${"liked"}&token=${token}`);
           }}
         >
           {/* preset liked songs box since spotify doesn't consider this a playlist */}
@@ -36,7 +38,9 @@ export default function PlaylistButtons({ initalPlaylists, token }) {
             key={index}
             className="flex h-40 w-[450px] space-x-4 p-4 border rounded-md shadow-md playlist-button"
             onClick={() => {
-              console.log(playlistObj?.href);
+              const parts = playlistObj?.href.split("/");
+              const id = parts[parts.length - 1];
+              router.push(`/success/screensaver?id=${id}&token=${token}`);
             }}
           >
             {/* playlistObj?.description , playlistObj?.href, playlistObj?.images, playlistObj?.name*/}
