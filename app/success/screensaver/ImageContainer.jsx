@@ -82,35 +82,6 @@ export default function ImageContainer({ imageArray }) {
 
   return (
     <div className="grid grid-cols-8 grid-rows-5" id="image-container">
-      {/* {imageArray.map((imgObj, index) => (
-        <div
-          key={index}
-          className="flex flex-col items-center"
-          id={`image-${index}`}
-          onClick={(e) => {
-            handleFlip(index);
-          }}
-        >
-          <div className="relative">
-            <div id={`front_${index}`} className="cardFront absolute">
-              <Image
-                src={JSON.parse(imgObj).songCover}
-                width={imgSide}
-                height={imgSide}
-                alt="image"
-              />
-            </div>
-            <div id={`back_${index}`} className="cardBack">
-              <Image
-                src={JSON.parse(imgObj).songCover}
-                width={imgSide}
-                height={imgSide}
-                alt="image"
-              />
-            </div>
-          </div>
-        </div>
-      ))} */}
       {renderDivs()}
     </div>
   );
