@@ -4,8 +4,10 @@ import { useEffect } from "react";
 
 export default function ImageContainer({ imageArray }) {
   //split array into front and back
-  const frontSides = imageArray.slice(0, 40);
-  const backSides = shuffle(imageArray.slice(40, 80));
+  const midPoint = Math.floor(imageArray.length / 2);
+  const frontSides = imageArray.slice(0, midPoint);
+  const backSides = shuffle(imageArray.slice(midPoint, imageArray.length));
+  console.log(frontSides, backSides);
   const imgSide = 640;
 
   useEffect(() => {
@@ -46,7 +48,7 @@ export default function ImageContainer({ imageArray }) {
 
   return (
     <div className="grid grid-cols-8 grid-rows-5" id="image-container">
-      {imageArray.slice(0, 40).map((imgObj, index) => (
+      {imageArray.slice(0, midPoint).map((imgObj, index) => (
         <div
           key={index}
           className="flex flex-col items-center"
@@ -67,8 +69,9 @@ export default function ImageContainer({ imageArray }) {
             <div id={`back_${index}`} className="cardBack">
               <Image
                 src={
-                  JSON.parse(backSides[Math.floor(Math.random() * 40)])
-                    .songCover
+                  // JSON.parse(backSides[Math.floor(Math.random() * midPoint)])
+                  //   .songCover
+                  JSON.parse(imgObj).songCover
                 }
                 width={imgSide}
                 height={imgSide}
