@@ -5,9 +5,6 @@ import { useEffect } from "react";
 export default function ImageContainer({ imageArray }) {
   //split array into front and back
   const midPoint = Math.floor(imageArray.length / 2);
-  const frontSides = imageArray.slice(0, midPoint);
-  const backSides = shuffle(imageArray.slice(midPoint, imageArray.length));
-  console.log(frontSides, backSides);
   const imgSide = 640;
 
   useEffect(() => {
@@ -46,9 +43,46 @@ export default function ImageContainer({ imageArray }) {
     }
   }
 
+  function renderDivs() {
+    const divs = [];
+    for (let i = 0; i < 40; i++) {
+      const imgObj = imageArray[i % imageArray.length]; // Repeat images if not enough
+      divs.push(
+        <div
+          key={i}
+          className="flex flex-col items-center"
+          id={`image-${i}`}
+          onClick={(e) => {
+            handleFlip(i);
+          }}
+        >
+          <div className="relative">
+            <div id={`front_${i}`} className="cardFront absolute">
+              <Image
+                src={JSON.parse(imgObj).songCover}
+                width={imgSide}
+                height={imgSide}
+                alt="image"
+              />
+            </div>
+            <div id={`back_${i}`} className="cardBack">
+              <Image
+                src={JSON.parse(imgObj).songCover}
+                width={imgSide}
+                height={imgSide}
+                alt="image"
+              />
+            </div>
+          </div>
+        </div>
+      );
+    }
+    return shuffle(divs);
+  }
+
   return (
     <div className="grid grid-cols-8 grid-rows-5" id="image-container">
-      {imageArray.slice(0, midPoint).map((imgObj, index) => (
+      {/* {imageArray.map((imgObj, index) => (
         <div
           key={index}
           className="flex flex-col items-center"
@@ -68,11 +102,7 @@ export default function ImageContainer({ imageArray }) {
             </div>
             <div id={`back_${index}`} className="cardBack">
               <Image
-                src={
-                  // JSON.parse(backSides[Math.floor(Math.random() * midPoint)])
-                  //   .songCover
-                  JSON.parse(imgObj).songCover
-                }
+                src={JSON.parse(imgObj).songCover}
                 width={imgSide}
                 height={imgSide}
                 alt="image"
@@ -80,7 +110,8 @@ export default function ImageContainer({ imageArray }) {
             </div>
           </div>
         </div>
-      ))}
+      ))} */}
+      {renderDivs()}
     </div>
   );
 }
