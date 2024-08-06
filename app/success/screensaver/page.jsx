@@ -1,6 +1,8 @@
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import ImageContainer from "./ImageContainer";
-import { Suspense } from "react";
+import ReturnButton from "../../ReturnButton";
+import FullscreenButton from "./FullscreenButton";
 
 export default async function Screensaver({ searchParams }) {
   const id = searchParams.id;
@@ -21,7 +23,11 @@ export default async function Screensaver({ searchParams }) {
   }
 
   return (
-    <div className="flex flex-col gap-12 break-words">
+    <div>
+      <div className="flex justify-center gap-10 py-5">
+        <ReturnButton />
+        <FullscreenButton />
+      </div>
       <Suspense fallback={<p>Loading...</p>}>
         <ImageContainer imageArray={albumImageURLs} />
       </Suspense>
