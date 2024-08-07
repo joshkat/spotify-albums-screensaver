@@ -5,7 +5,7 @@ export default function ReturnButton() {
   const router = useRouter();
 
   return (
-    <button onClick={() => router.back()} className="btn">
+    <button onClick={() => router.back()} className="btn w-[175px]">
       <svg
         className="h-6 w-6"
         viewBox="0 0 24 24"

@@ -4,7 +4,6 @@ import { useEffect } from "react";
 
 export default function ImageContainer({ imageArray }) {
   //split array into front and back
-  const midPoint = Math.floor(imageArray.length / 2);
   const imgSide = 640;
 
   useEffect(() => {
@@ -19,7 +18,7 @@ export default function ImageContainer({ imageArray }) {
     }, 2000); // Flips every 2 second(s) (2000 milliseconds)
 
     return () => clearInterval(intervalId);
-  }, []);
+  });
 
   function handleFlip(index) {
     const front = document.getElementById(`front_${index}`);

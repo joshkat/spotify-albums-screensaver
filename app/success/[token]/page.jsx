@@ -5,13 +5,13 @@ import { getPlaylists } from "@/app/lib/getPlaylists";
 export default async function SelectionScreen({ params }) {
   const playlists = (await getPlaylists(params.token, 0))[[0]];
   return (
-    <main className="flex flex-col items-center min-h-screen p-10">
+    <main className="flex flex-col items-center min-h-screen p-10 gap-3">
       <p className="text-center">
-        Select the playlist, keep in mind depending on playlist size the grid
-        will be resize accordingly.
+        Select the playlist, keep in mind the more unique album covers there are
+        in your playlist the better it&apos;ll turn out (since it&apos;s an 8*5
+        grid).
         <br />
-        For largest grid size have at least 80 unique album covers (for an 8 x 5
-        grid)
+        (Unless you like a bunch of repeating art)
       </p>
 
       <PlaylistButtons initalPlaylists={playlists} token={params.token} />

@@ -7,7 +7,7 @@ export default function FullscreenButton() {
   }
 
   return (
-    <button className="btn" onClick={() => handleFullScreen()}>
+    <button className="btn w-[175px]" onClick={() => handleFullScreen()}>
       <svg
         className="h-6 w-6"
         viewBox="0 0 16 16"

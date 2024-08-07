@@ -6,7 +6,7 @@ export default async function RedirectToPlaylist({ id }) {
       ? "https://open.spotify.com/collection/tracks"
       : `https://open.spotify.com/playlist/${id}`;
   return (
-    <Link href={url} className="btn">
+    <Link href={url} className="btn w-[175px]" target="_">
       <svg
         className="h-6 w-6"
         viewBox="0 0 24 24"

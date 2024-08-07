@@ -17,7 +17,7 @@ export default async function Screensaver({ searchParams }) {
       ? `https://api.spotify.com/v1/me/tracks?limit=50`
       : `https://api.spotify.com/v1/playlists/${id}/tracks?limit=50`;
   const albumImageURLs = await getImageURLs(new Set(), playlistURL, token);
-  if (albumImageURLs.length < 3) {
+  if (albumImageURLs.length < 1) {
     redirect(
       `/400?error=Your playlist doesn't contain enough songs to generate art`
     );
