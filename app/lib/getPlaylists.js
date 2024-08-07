@@ -17,7 +17,7 @@ export async function getPlaylists(token, offset) {
   let res = await req;
   if (res.status != 200) {
     // something went down, redirect out of here
-    console.log(await res.text(), res.status, token);
+    console.error(await res.text(), res.status, token);
     redirect("/403");
   }
 

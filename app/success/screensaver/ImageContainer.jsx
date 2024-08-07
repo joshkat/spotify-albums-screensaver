@@ -14,7 +14,7 @@ export default function ImageContainer({ imageArray }) {
         let img = document.getElementById(`image-${randomIndex}`);
         if (img !== null) img.click();
       } catch (err) {
-        console.log("Error flipping cards");
+        console.error("Error flipping cards");
       }
     }, 2000); // Flips every 2 second(s) (2000 milliseconds)
 

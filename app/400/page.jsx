@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 export default function Error({ searchParams }) {
-  console.log(searchParams);
   return (
     <main className="flex justify-center items-center min-h-screen flex-col gap-8">
       <div className="flex">
