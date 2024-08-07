@@ -28,7 +28,7 @@ export default async function Screensaver({ searchParams }) {
       <div className="flex justify-center gap-10 py-5">
         <ReturnButton />
         <FullscreenButton />
-        <RedirectToPlaylist id={id} token={token} />
+        <RedirectToPlaylist id={id} />
       </div>
       <Suspense fallback={<p>Loading...</p>}>
         <ImageContainer imageArray={albumImageURLs} />

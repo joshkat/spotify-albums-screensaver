@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-export default async function RedirectToPlaylist({ id, token }) {
+export default async function RedirectToPlaylist({ id }) {
   const url =
     id === "liked"
       ? "https://open.spotify.com/collection/tracks"
-      : (await getPlaylistURL(id, token)) || "https://open.spotify.com";
+      : `https://open.spotify.com/playlist/${id}`;
   return (
     <Link href={url} className="btn">
       <svg
@@ -30,23 +30,4 @@ export default async function RedirectToPlaylist({ id, token }) {
       Open in Spotify
     </Link>
   );
-}
-
-async function getPlaylistURL(id, token) {
-  const req = fetch(
-    `https://api.spotify.com/v1/playlists/${id}?fields=external_urls`,
-    {
-      method: "GET",
-      headers: {
-        "content-type": "application/x-www-form-urlencoded",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  const res = await req;
-  const json = await res.json();
-  if (res.status != 200) {
-    return `/400?error=There was a problem fetching the URL from Spotify, they said: ${json?.error?.message}`;
-  }
-  return json?.external_urls?.spotify;
 }
