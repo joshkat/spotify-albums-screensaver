@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ReturnButton from "../ReturnButton";
 
 export default function Error({ searchParams }) {
   return (
@@ -16,9 +17,12 @@ export default function Error({ searchParams }) {
           know
         </p>
       )}
-      <Link href="/" className="btn">
-        Return Home
-      </Link>
+      <div className="flex flex-wrap gap-3 justify-center">
+        <ReturnButton />
+        <Link href="/" className="btn w-[175px]">
+          Return Home
+        </Link>
+      </div>
     </main>
   );
 }

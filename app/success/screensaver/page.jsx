@@ -1,3 +1,4 @@
+import Loading from "./loading";
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import ImageContainer from "./ImageContainer";
@@ -30,7 +31,7 @@ export default async function Screensaver({ searchParams }) {
         <FullscreenButton />
         <RedirectToPlaylist id={id} />
       </div>
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<Loading />}>
         <ImageContainer imageArray={albumImageURLs} />
       </Suspense>
     </div>
