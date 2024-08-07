@@ -40,7 +40,8 @@ export default async function Screensaver({ searchParams }) {
 async function getImageURLs(albumSet, url, token) {
   if (albumSet.size >= 80 || url === null) {
     // base case when we hit desired num of URLs or when URL is ""
-    return [...albumSet];
+    return [...albumSet].filter((item) => item != "{}");
+    // filter out "{}" which comes up when album is local and spotify doesn't have the art
   }
 
   const req = fetch(url, {
