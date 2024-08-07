@@ -50,7 +50,7 @@ export default function ImageContainer({ imageArray }) {
       divs.push(
         <div
           key={i}
-          className="flex flex-col items-center"
+          className="flex flex-col items-center justify-center"
           id={`image-${i}`}
           onClick={(e) => {
             handleFlip(i);
