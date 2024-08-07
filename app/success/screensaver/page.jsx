@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import ImageContainer from "./ImageContainer";
 import ReturnButton from "../../ReturnButton";
 import FullscreenButton from "./FullscreenButton";
+import RedirectToPlaylist from "./RedirectToPlaylist";
 
 export default async function Screensaver({ searchParams }) {
   const id = searchParams.id;
@@ -27,6 +28,7 @@ export default async function Screensaver({ searchParams }) {
       <div className="flex justify-center gap-10 py-5">
         <ReturnButton />
         <FullscreenButton />
+        <RedirectToPlaylist id={id} token={token} />
       </div>
       <Suspense fallback={<p>Loading...</p>}>
         <ImageContainer imageArray={albumImageURLs} />
